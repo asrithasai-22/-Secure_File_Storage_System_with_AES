@@ -43,10 +43,11 @@ secure\_file\_storage/
 
 ---
 
-## ⚙️ Setup Instructions
 
-### 1. Clone the Repo
-```bash
+⚙️ Setup Instructions
+
+1. Clone the Repo
+bash
 git clone https://github.com/yourusername/secure_file_storage.git
 cd secure_file_storage
 ````
