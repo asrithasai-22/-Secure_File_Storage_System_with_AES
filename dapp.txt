@@ -1,0 +1,122 @@
+metamask connectionn
+
+remix :
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SimpleStorage {
+    uint256 public storedData;
+
+    function set(uint256 _value) public {
+        storedData = _value;
+    }
+
+    function get() public view returns (uint256) {
+        return storedData;
+    }
+}
+
+
+compile,deploy
+
+vs
+npx create-react-app my-dapp
+cd my-dapp
+npm install ethers
+
+termina
+import { useState } from "react";
+import { ethers } from "ethers";
+import SimpleStorageABI from "./SimpleStorage.json";
+
+const contractAddress = "0x09aAFd8E256aC31c325bdae27762D4bc4201698C"; // 🔴 Replace this with your actual contract address
+
+function App() {
+  const [value, setValue] = useState("");
+  const [retrieved, setRetrieved] = useState("");
+
+  async function requestAccount() {
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+  }
+
+  async function setStorage() {
+    if (!window.ethereum) return;
+    await requestAccount();
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, SimpleStorageABI, signer);
+    await contract.set(value);
+  }
+
+  async function getStorage() {
+    if (!window.ethereum) return;
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const contract = new ethers.Contract(contractAddress, SimpleStorageABI, provider);
+    const val = await contract.get();
+    setRetrieved(val.toString());
+  }
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Simple Storage DApp</h2>
+      <input
+        type="number"
+        placeholder="Enter a number"
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <br /><br />
+      <button onClick={setStorage}>Set Value</button>
+      <button onClick={getStorage}>Get Value</button>
+      <p><b>Stored Value:</b> {retrieved}</p>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+abi from remix(compile phase)
+
+
+[
+	{
+		"inputs": [],
+		"name": "get",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "set",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "storedData",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
