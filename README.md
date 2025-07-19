@@ -1,6 +1,3 @@
-### 📄 `README.md`
-
-```markdown
 # 🔐 Secure File Storage System with AES-256
 
 This project is a **Secure File Storage System** built in **Python** using **AES-256 encryption (CBC mode)**. It allows users to encrypt files, store them securely, and later decrypt them with integrity verification using SHA-256.
@@ -31,7 +28,6 @@ This project is a **Secure File Storage System** built in **Python** using **AES
 
 ## 📁 Project Structure
 
-```
 
 secure\_file\_storage/
 │
