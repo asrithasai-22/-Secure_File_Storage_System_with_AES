@@ -41,9 +41,6 @@ secure\_file\_storage/
 
 ````
 
----
-
-
 ⚙️ Setup Instructions
 
 1. Clone the Repo
